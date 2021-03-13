@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Lenovo
  */
 @SpringBootApplication
-@MapperScan("com.ky2009888.apps.mapper")
 public class MybatisPlusShowApplication {
     /**
      * 主入口运行方法

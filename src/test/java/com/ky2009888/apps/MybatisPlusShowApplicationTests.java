@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -32,8 +33,14 @@ class MybatisPlusShowApplicationTests {
      */
     @Test
     void addUser() {
-        for (int i = 3; i < 100; i++) {
-            userMapper.insert(new User(Long.parseLong(i + ""), "jijinliang", i, "2345@qq.com"));
+        for (int i = 0; i < 100; i++) {
+            int age = i;
+            if (i < 10) {
+                age = i + 5;
+            } else if (i > 60) {
+                age = i - 30;
+            }
+            userMapper.insert(new User("jijinliang", age, "2345@qq.com"));
         }
     }
 
@@ -42,7 +49,7 @@ class MybatisPlusShowApplicationTests {
      */
     @Test
     void updateUser() {
-        userMapper.updateById(new User(Long.parseLong("2"), "jimanning", 11, "26890@qq.com"));
+        userMapper.updateById(new User(Long.parseLong("2"), "jimanning", 11, "26890@qq.com", new Date(), new Date()));
     }
 
     /**

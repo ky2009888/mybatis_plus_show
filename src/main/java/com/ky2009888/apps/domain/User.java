@@ -1,10 +1,9 @@
 package com.ky2009888.apps.domain;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +23,7 @@ public class User implements Serializable {
     /**
      * 用户ID
      */
-    @TableId
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
@@ -41,9 +40,32 @@ public class User implements Serializable {
      * 邮箱.
      */
     private String email;
+    /**
+     * 创建时间.
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+    /**
+     * 更新时间.
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 自定义构造方法.
+     *
+     * @param name  用户名.
+     * @param age   年龄.
+     * @param email 邮箱.
+     */
+    public User(String name, Integer age, String email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
 
     @Override
     public boolean equals(Object that) {
