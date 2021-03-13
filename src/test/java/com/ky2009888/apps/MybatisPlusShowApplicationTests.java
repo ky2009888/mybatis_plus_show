@@ -1,5 +1,8 @@
 package com.ky2009888.apps;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ky2009888.apps.domain.User;
 import com.ky2009888.apps.mapper.UserMapper;
@@ -28,14 +31,28 @@ class MybatisPlusShowApplicationTests {
         User user = userMapper.selectById(1);
         log.info("user info:{}", user.toString());
     }
+
     /**
      * 查询用户.
      */
     @Test
     void selectUserByPage() {
-        Page<User> userPage = new Page<>(1,10);
+        Page<User> userPage = new Page<>(1, 10);
         Page<User> userPage1 = userMapper.selectPage(userPage, null);
         log.info("Total:{}", userPage1.getTotal());
+    }
+
+    /**
+     * 查询用户.
+     */
+    @Test
+    void selectUserByPage2() {
+        Page<User> userPage = new Page<>(1, 5);
+        QueryWrapper userQuery = new QueryWrapper();
+        userQuery.eq("name", "jiyouhui");
+        Page<User> userPage1 = userMapper.selectPage(userPage, userQuery);
+        log.info("Total:{}", userPage1.getTotal());
+        log.info("userPage1:{}", userPage1.toString());
     }
 
     /**
