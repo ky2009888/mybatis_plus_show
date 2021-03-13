@@ -1,5 +1,6 @@
 package com.ky2009888.apps;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ky2009888.apps.domain.User;
 import com.ky2009888.apps.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,15 @@ class MybatisPlusShowApplicationTests {
     void selectUser() {
         User user = userMapper.selectById(1);
         log.info("user info:{}", user.toString());
+    }
+    /**
+     * 查询用户.
+     */
+    @Test
+    void selectUserByPage() {
+        Page<User> userPage = new Page<>(1,10);
+        Page<User> userPage1 = userMapper.selectPage(userPage, null);
+        log.info("Total:{}", userPage1.getTotal());
     }
 
     /**
