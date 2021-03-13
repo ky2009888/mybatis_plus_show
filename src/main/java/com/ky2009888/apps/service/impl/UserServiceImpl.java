@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
+ * @author Lenovo
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
